@@ -35,26 +35,74 @@ I worked on this across two competition years. In Year 2, I started by modeling 
 Here is how the work broke down across the two years:
 
 ```mermaid
-timeline
-    title How the BDU Project Progressed
-    section Year 2: Prototyping (Jan 2025 - Apr 2025)<br/>Electrical & Mechanical Team Member
-        Jan 2025 : Checked tray space constraints : Picked Eaton Breaktors and relays
-        Feb 2025 : 3D CAD modeling in SolidWorks : Sized 1" x 1/4" aluminum busbars
-        Mar 2025 : Checked high-voltage safety gaps (SAE F-3.5) : Made wood and plastic bench mockups
-        Apr 2025 : Built first prototype box : Sent parts to Lambton team
-    section Year 2: Build & Competition (Apr 2025 - Aug 2025)<br/>BDU Lead | Team Choice
-        Apr 2025 : Stepped up as BDU Lead : Ran assembly and quality checks
-        May 2025 : Competed in Indianapolis : Passed 300A 30-minute fast-charging test
-        Jun 2025 : Tracked down post-competition bugs : Looked into hot 12V relay coils
-        Jul 2025 : Built a 20 kHz PWM holding circuit : Fixed broken monitor chip on test bench
-        Aug 2025 : Wrote up Year 2 competition report : Set up handoff notes
-    section Co-op Break (May 2025 - Dec 2025)<br/>Reliability Engineering Intern at OtO Inc.
-        May 2025 - Dec 2025 : Hardware reliability testing : Wrote Python and SQL data scripts
-    section Year 3: Complete Redesign (Jan 2026 - Apr 2026)<br/>BDU Lead | Team Choice
-        Jan 2026 : Returned as BDU Lead : Planned the "Move the Van" push
-        Feb 2026 : Rebuilt the whole CAD model in SolidWorks : Made the angled service cover
-        Mar 2026 : Fixed copper-to-aluminum joints : Made narrow copper piece for current sensor
-        Apr 2026 : Wired up 1.1 kWh battery submodules : Got ready for vehicle track testing
+flowchart LR
+    subgraph P1["Phase 1: Y2 Prototyping<br/>(Jan – Apr 2025)"]
+        direction TB
+        R1["<b>Role: E&M Team Member</b><br/><i>Hybrid · SolidWorks CAD</i>"]
+        A1["Map 100mm height constraints"]
+        A2["Size 1x1/4 in aluminum busbars"]
+        A3["Check SAE F-3.5 safety gaps"]
+        A4["Build initial prototype box"]
+        R1 --> A1 --> A2 --> A3 --> A4
+    end
+
+    subgraph P2["Phase 2: Y2 Build & Track<br/>(Apr – Aug 2025)"]
+        direction TB
+        R2["<b>Role: BDU Lead | Team Choice</b><br/><i>Remote / Indianapolis</i>"]
+        B1["Lead physical assembly & torque"]
+        B2["300A DCFC 30-min run (<30°C rise)"]
+        B3["Diagnose 12V coil thermal rise"]
+        B4["Build 20 kHz PWM holding circuit"]
+        R2 --> B1 --> B2 --> B3 --> B4
+    end
+
+    subgraph COOP["Industry Co-op Break<br/>(May – Dec 2025)"]
+        direction TB
+        R_COOP["<b>Reliability Engineering Intern</b><br/><i>OtO Inc. · Hardware Reliability</i>"]
+        C1["Hardware reliability & testing"]
+        C2["Python & SQL automated pipelines"]
+        R_COOP --> C1 --> C2
+    end
+
+    subgraph P3["Phase 3: Y3 Complete Redesign<br/>(Jan – Apr 2026)"]
+        direction TB
+        R3["<b>Role: BDU Lead | Team Choice</b><br/><i>Hybrid · SolidWorks Redesign</i>"]
+        D1["Full SolidWorks CAD redesign"]
+        D2["Angled service lid & multi-tier bars"]
+        D3["LEM copper throat & tin joints"]
+        D4["Wire 1.1 kWh submodules for van"]
+        R3 --> D1 --> D2 --> D3 --> D4
+    end
+
+    P1 --> P2 --> P3
+    P2 -. "Concurrent" .-> COOP
+
+    style P1 fill:#0f172a,stroke:#3b82f6,stroke-width:2px,color:#e2e8f0
+    style P2 fill:#0f172a,stroke:#06b6d4,stroke-width:2px,color:#e2e8f0
+    style COOP fill:#0f172a,stroke:#64748b,stroke-width:2px,color:#e2e8f0
+    style P3 fill:#0f172a,stroke:#10b981,stroke-width:2px,color:#e2e8f0
+
+    style R1 fill:#1e293b,stroke:#3b82f6,color:#e2e8f0
+    style A1 fill:#1e293b,stroke:#475569,color:#cbd5e1
+    style A2 fill:#1e293b,stroke:#475569,color:#cbd5e1
+    style A3 fill:#1e293b,stroke:#475569,color:#cbd5e1
+    style A4 fill:#1e293b,stroke:#475569,color:#cbd5e1
+
+    style R2 fill:#1e293b,stroke:#06b6d4,color:#e2e8f0
+    style B1 fill:#1e293b,stroke:#475569,color:#cbd5e1
+    style B2 fill:#1e293b,stroke:#475569,color:#cbd5e1
+    style B3 fill:#1e293b,stroke:#475569,color:#cbd5e1
+    style B4 fill:#1e293b,stroke:#475569,color:#cbd5e1
+
+    style R_COOP fill:#1e293b,stroke:#64748b,color:#e2e8f0
+    style C1 fill:#1e293b,stroke:#475569,color:#cbd5e1
+    style C2 fill:#1e293b,stroke:#475569,color:#cbd5e1
+
+    style R3 fill:#1e293b,stroke:#10b981,color:#e2e8f0
+    style D1 fill:#1e293b,stroke:#475569,color:#cbd5e1
+    style D2 fill:#1e293b,stroke:#475569,color:#cbd5e1
+    style D3 fill:#1e293b,stroke:#475569,color:#cbd5e1
+    style D4 fill:#1e293b,stroke:#475569,color:#cbd5e1
 ```
 
 | Phase & Role | Dates & Setup | What I Actually Did |
