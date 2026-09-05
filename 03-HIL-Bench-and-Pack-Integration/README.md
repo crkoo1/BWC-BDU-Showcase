@@ -73,11 +73,13 @@ flowchart TD
 
 ## Why We Need Precharge (And How the Timing Works)
 
-Here is the problem: our motor inverter has huge empty capacitors ($1000\mu\text{F}$) sitting across its input terminals. 
+Here is the problem: our motor inverter has huge empty capacitors (1000 µF) sitting across its input terminals. 
 
 If you just slam the main 400V contactor shut onto an empty inverter, you create a momentary dead short. Thousands of amps rush in over a few microseconds:
 
-$$I_{\text{inrush}} \approx \frac{400\text{V}}{0.05\Omega} = 8,000\text{ Amps}$$
+```text
+I_inrush ≈ 400V / 0.05Ω = 8,000 Amps
+```
 
 That giant arc will weld the contactor pads shut or blow our main fuses right away. To stop that, we use a precharge circuit:
 
@@ -110,10 +112,10 @@ stateDiagram-v2
 
 ### The Step-by-Step Sequence:
 1. **Negative First**: The main negative contactor closes first to give the system a ground reference.
-2. **Current Limiting**: The precharge relay closes. Current flows through our aluminum-housed 50Ω 100W resistor, capping peak current to just $8\text{ Amps}$ ($400\text{V} / 50\Omega$).
-3. **Checking the Voltage**: The BMS watches the inverter voltage. Once the difference between the battery and the inverter is under $10\text{V}$ (or inverter hits $95\%$ of battery voltage), we close the main positive switch.
-4. **Smooth Handover**: We leave both the main switch and the precharge relay closed together for $100\text{ ms}$ so the voltage doesn't dip, and then open the precharge relay.
-5. **Safety Timeout**: If the inverter fails to charge up within $1.5\text{ seconds}$, the BMS assumes there is a short in the inverter, opens all switches immediately, and locks out the system.
+2. **Current Limiting**: The precharge relay closes. Current flows through our aluminum-housed 50Ω 100W resistor, capping peak current to just 8 Amps (400V / 50Ω).
+3. **Checking the Voltage**: The BMS watches the inverter voltage. Once the difference between the battery and the inverter is under 10V (or inverter hits 95% of battery voltage), we close the main positive switch.
+4. **Smooth Handover**: We leave both the main switch and the precharge relay closed together for 100 ms so the voltage doesn't dip, and then open the precharge relay.
+5. **Safety Timeout**: If the inverter fails to charge up within 1.5 seconds, the BMS assumes there is a short in the inverter, opens all switches immediately, and locks out the system.
 
 ---
 
@@ -128,7 +130,7 @@ During our first bench tests, our BMS controller couldn't talk to the **ADBMS295
 ```
 
 ### How We Tracked It Down:
-1. We hooked an oscilloscope up to the differential signal lines ($IPA$ and $IMA$). The waveforms looked completely distorted, pulled down toward ground.
+1. We hooked an oscilloscope up to the differential signal lines (IPA and IMA). The waveforms looked completely distorted, pulled down toward ground.
 2. We inspected the board under a microscope and found the problem: a tiny digital isolation chip in a QFN package had solder bridged underneath its pins, shorting the signal line to digital ground.
 
 ### How We Fixed It:
@@ -160,7 +162,7 @@ To protect the pack, we built a dedicated **11-Line Sense Fuse Box**:
 ```
 
 - **Fuses**: We used **500mA fast-acting ceramic fuses** (Littelfuse 0154.500). Normal voltage sensing only draws tiny micro-amps, so 500mA is plenty for normal operation, but blows instantly during a short.
-- **The Box**: We modeled the small box in SolidWorks with $5\text{ mm}$ thick walls and $5\text{ mm}$ legs to raise it off the mounting plate. That way, if a fuse ever blows, any carbon soot stays trapped in the box and cannot track across metal.
+- **The Box**: We modeled the small box in SolidWorks with 5 mm thick walls and 5 mm legs to raise it off the mounting plate. That way, if a fuse ever blows, any carbon soot stays trapped in the box and cannot track across metal.
 
 ---
 
@@ -172,10 +174,10 @@ We brought our setup up to the same standard by testing these four fault scenari
 
 | Test Case | What Fault We Injected | What the System Did | Result |
 | :--- | :--- | :--- | :--- |
-| **TC-01** | Fast-charge contactor heating up ($T > 65^\circ\text{C}$) | Cut charger current from 300A down to 150A. If temp hit 75°C, shut off. | **PASS** (Charger stepped down smoothly) |
+| **TC-01** | Fast-charge contactor heating up (T > 65°C) | Cut charger current from 300A down to 150A. If temp hit 75°C, shut off. | **PASS** (Charger stepped down smoothly) |
 | **TC-02** | Welded main contactor | Commanded contactor open, but checked if voltage stayed high across contacts. | **PASS** (Detected welded switch in 15 ms; locked out precharge) |
 | **TC-03** | Short circuit in motor inverter | Inverter voltage failed to climb past 50V during precharge. | **PASS** (Opened precharge relay at 1.5s; 50Ω resistor stayed cool) |
-| **TC-04** | High-voltage leak to chassis | Added a $100\text{ k}\Omega$ leak path from 400V to van frame. | **PASS** (ADBMS2950 detected isolation drop and flagged safety alarm) |
+| **TC-04** | High-voltage leak to chassis | Added a 100 kΩ leak path from 400V to van frame. | **PASS** (ADBMS2950 detected isolation drop and flagged safety alarm) |
 
 ---
 

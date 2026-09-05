@@ -36,73 +36,13 @@ Here is how the work broke down across the two years:
 
 ```mermaid
 flowchart LR
-    subgraph P1["Phase 1: Y2 Prototyping<br/>(Jan – Apr 2025)"]
-        direction TB
-        R1["<b>Role: E&M Team Member</b><br/><i>Hybrid · SolidWorks CAD</i>"]
-        A1["Map 100mm height constraints"]
-        A2["Size 1x1/4 in aluminum busbars"]
-        A3["Check SAE F-3.5 safety gaps"]
-        A4["Build initial prototype box"]
-        R1 --> A1 --> A2 --> A3 --> A4
-    end
-
-    subgraph P2["Phase 2: Y2 Build & Track<br/>(Apr – Aug 2025)"]
-        direction TB
-        R2["<b>Role: BDU Lead | Team Choice</b><br/><i>Remote / Indianapolis</i>"]
-        B1["Lead physical assembly & torque"]
-        B2["300A DCFC 30-min run (<30°C rise)"]
-        B3["Diagnose 12V coil thermal rise"]
-        B4["Build 20 kHz PWM holding circuit"]
-        R2 --> B1 --> B2 --> B3 --> B4
-    end
-
-    subgraph COOP["Industry Co-op Break<br/>(May – Dec 2025)"]
-        direction TB
-        R_COOP["<b>Reliability Engineering Intern</b><br/><i>OtO Inc. · Hardware Reliability</i>"]
-        C1["Hardware reliability & testing"]
-        C2["Python & SQL automated pipelines"]
-        R_COOP --> C1 --> C2
-    end
-
-    subgraph P3["Phase 3: Y3 Complete Redesign<br/>(Jan – Apr 2026)"]
-        direction TB
-        R3["<b>Role: BDU Lead | Team Choice</b><br/><i>Hybrid · SolidWorks Redesign</i>"]
-        D1["Full SolidWorks CAD redesign"]
-        D2["Angled service lid & multi-tier bars"]
-        D3["LEM copper throat & tin joints"]
-        D4["Wire 1.1 kWh submodules for van"]
-        R3 --> D1 --> D2 --> D3 --> D4
-    end
-
-    P1 --> P2 --> P3
-    P2 -. "Concurrent" .-> COOP
+    P1["<b>Phase 1: Y2 Prototyping</b><br/><i>Jan 2025 – Apr 2025 · Hybrid</i><br/><b>Electrical & Mechanical Member</b><br/>• SolidWorks CAD packaging<br/>• 1'' × 1/4'' busbar sizing<br/>• SAE F-3.5 30mm safety gaps<br/>• Initial bench prototype"]
+    --> P2["<b>Phase 2: Y2 Build & Track</b><br/><i>Apr 2025 – Aug 2025 · Remote</i><br/><b>BDU Lead | Team Choice</b><br/>• Full physical build & assembly<br/>• 300A DCFC 30-min run (&lt;30°C rise)<br/>• Diagnosed 12V coil thermal rise<br/>• Built 20 kHz PWM hold circuit"]
+    --> P3["<b>Phase 3: Y3 Full Redesign</b><br/><i>Jan 2026 – Apr 2026 · Hybrid</i><br/><b>BDU Lead | Team Choice</b><br/>• Complete SolidWorks overhaul<br/>• Angled inspection cover<br/>• Stepped multi-tier busbars<br/>• 1.1 kWh submodules for van"]
 
     style P1 fill:#0f172a,stroke:#3b82f6,stroke-width:2px,color:#e2e8f0
     style P2 fill:#0f172a,stroke:#06b6d4,stroke-width:2px,color:#e2e8f0
-    style COOP fill:#0f172a,stroke:#64748b,stroke-width:2px,color:#e2e8f0
     style P3 fill:#0f172a,stroke:#10b981,stroke-width:2px,color:#e2e8f0
-
-    style R1 fill:#1e293b,stroke:#3b82f6,color:#e2e8f0
-    style A1 fill:#1e293b,stroke:#475569,color:#cbd5e1
-    style A2 fill:#1e293b,stroke:#475569,color:#cbd5e1
-    style A3 fill:#1e293b,stroke:#475569,color:#cbd5e1
-    style A4 fill:#1e293b,stroke:#475569,color:#cbd5e1
-
-    style R2 fill:#1e293b,stroke:#06b6d4,color:#e2e8f0
-    style B1 fill:#1e293b,stroke:#475569,color:#cbd5e1
-    style B2 fill:#1e293b,stroke:#475569,color:#cbd5e1
-    style B3 fill:#1e293b,stroke:#475569,color:#cbd5e1
-    style B4 fill:#1e293b,stroke:#475569,color:#cbd5e1
-
-    style R_COOP fill:#1e293b,stroke:#64748b,color:#e2e8f0
-    style C1 fill:#1e293b,stroke:#475569,color:#cbd5e1
-    style C2 fill:#1e293b,stroke:#475569,color:#cbd5e1
-
-    style R3 fill:#1e293b,stroke:#10b981,color:#e2e8f0
-    style D1 fill:#1e293b,stroke:#475569,color:#cbd5e1
-    style D2 fill:#1e293b,stroke:#475569,color:#cbd5e1
-    style D3 fill:#1e293b,stroke:#475569,color:#cbd5e1
-    style D4 fill:#1e293b,stroke:#475569,color:#cbd5e1
 ```
 
 | Phase & Role | Dates & Setup | What I Actually Did |
@@ -220,7 +160,7 @@ BDU-Showcase/
 
 | Chapter | What It Covers | Key Topics |
 | :--- | :--- | :--- |
-| [**01. Electromechanical Architecture**](01-Electromechanical-Architecture/) | Physical packaging & busbar design | 1" × 1/4" aluminum busbars, 30 mm safety clearance, torque marks, avoiding bolt bottom-outs, and mixing copper with aluminum. |
+| [**01. Electromechanical Architecture**](01-Electromechanical-Architecture/) | Physical packaging & busbar design | 1" × 1/4" aluminum busbars, 30 mm safety clearance, torque marks, breaking a Breaktor from bolt bottom-out, and mixing copper with aluminum. |
 | [**02. Testing & Competition Diagnostics**](02-Testing-Validation-and-Diagnostics/) | Real-world testing at competition | 300A fast-charging test run in Indianapolis, where we placed temperature sensors, and the **Flagship Case Study**. |
 | [**03. HIL Bench & Pack Integration**](03-HIL-Bench-and-Pack-Integration/) | Controls, board repairs, and Year 3 | OpenECU BMS setup, precharge timing, fixing a shorted surface-mount chip with hot air, and our Year 3 plan to move the van. |
 

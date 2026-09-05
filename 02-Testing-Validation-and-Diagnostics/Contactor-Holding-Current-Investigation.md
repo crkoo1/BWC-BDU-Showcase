@@ -14,16 +14,16 @@
 
 ## 1. What Was Happening
 
-During our 300A fast-charging test in Indianapolis, the high-voltage side worked great. The 1" × 1/4" aluminum busbars and heavy terminals only reached **$46.1^\circ\text{C}$**, well under our $30^\circ\text{C}$ rise limit in a $22.6^\circ\text{C}$ room.
+During our 300A fast-charging test in Indianapolis, the high-voltage side worked great. The 1" × 1/4" aluminum busbars and heavy terminals only reached **46.1°C**, well under our 30°C rise limit in a 22.6°C room.
 
 But when we looked at our thermal logs and checked the box with an infrared thermometer, we found a weird issue:
 
-> **The Problem**: The high-voltage bars were cooling down, but the low-voltage 12V coil on our main contactor kept heating up, reaching **$48.5^\circ\text{C}$** inside the closed box.
+> **The Problem**: The high-voltage bars were cooling down, but the low-voltage 12V coil on our main contactor kept heating up, reaching **48.5°C** inside the closed box.
 
 Our BDU is made from sealed, flame-retardant polycarbonate with no cooling fan. Having a steady heat source inside the box caused a few real problems:
 1. It cooks the thin enamel coating on the coil wire over time.
 2. It radiates heat onto nearby precharge and sense wires.
-3. Copper wire resistance goes up when it gets hot ($R_{\text{hot}} = R_{\text{cold}}(1 + \alpha \Delta T)$). That means less current flows, which weakens the magnetic hold and risks the contactor vibrating open over bumps.
+3. Copper wire resistance goes up when it gets hot (R_hot = R_cold × [1 + α·ΔT]). That means less current flows, which weakens the magnetic hold and risks the contactor vibrating open over bumps.
 
 The judges from Argonne National Lab gave us a **Yellow Flag** and told us to fix the coil drive before putting the pack in the vehicle.
 
@@ -83,8 +83,8 @@ Back in the shop, we hooked the contactor up to a bench power supply, clamped a 
 ```
 
 ### What the Numbers Showed:
-1. **Constant Power Loss**: The coil drew $0.375\text{ A}$ at $12.02\text{ V}$ non-stop. That's $4.51\text{ W}$ per contactor. With three contactors energized during fast charging, that was over **$13.5\text{ W}$ of heat** pouring into an airtight box.
-2. **Resistance Creep**: As the copper heated up, coil resistance climbed from $32.0\Omega$ to $35.1\Omega$, dropping our holding current margin by almost 10%.
+1. **Constant Power Loss**: The coil drew 0.375 A at 12.02 V non-stop. That's 4.51 W per contactor. With three contactors energized during fast charging, that was over **13.5 W of heat** pouring into an airtight box.
+2. **Resistance Creep**: As the copper heated up, coil resistance climbed from 32.0 Ω to 35.1 Ω, dropping our holding current margin by almost 10%.
 
 ---
 
@@ -92,9 +92,9 @@ Back in the shop, we hooked the contactor up to a bench power supply, clamped a 
 
 Here's the physics behind what went wrong:
 
-1. **Pulling the switch shut ($0$ to $100\text{ ms}$)**: When the contactor is open, there is an air gap of about $1.5\text{ mm}$ between the metal armature and the coil core. Magnetic fields travel easily through iron, but struggle to cross air. So to overcome that air gap and compress the heavy internal spring, you need a lot of power. Full 12V gives you that strong pull.
-2. **Holding the switch shut (after $100\text{ ms}$)**: Once the contacts slam shut, the air gap drops to **zero**. The magnetic loop is now solid iron. It takes way less magnetic force to keep that spring compressed than it did to pull it across the open gap in the first place. You only need about **25% to 35% of the holding force**.
-3. **The Mistake**: Our driver was keeping the MOSFET fully turned ON ($100\%$ duty cycle) the entire time. We were dumping full pull-in power into the coil for 30 minutes straight, and nearly all of it turned into heat.
+1. **Pulling the switch shut (0 to 100 ms)**: When the contactor is open, there is an air gap of about 1.5 mm between the metal armature and the coil core. Magnetic fields travel easily through iron, but struggle to cross air. So to overcome that air gap and compress the heavy internal spring, you need a lot of power. Full 12V gives you that strong pull.
+2. **Holding the switch shut (after 100 ms)**: Once the contacts slam shut, the air gap drops to **zero**. The magnetic loop is now solid iron. It takes way less magnetic force to keep that spring compressed than it did to pull it across the open gap in the first place. You only need about **25% to 35% of the holding force**.
+3. **The Mistake**: Our driver was keeping the MOSFET fully turned ON (100% duty cycle) the entire time. We were dumping full pull-in power into the coil for 30 minutes straight, and nearly all of it turned into heat.
 
 ---
 
@@ -134,21 +134,21 @@ flowchart LR
 ```
 
 - **Flyback Diode**: We added a fast Schottky diode across the coil. When the PWM pulses OFF, the magnetic energy in the coil loops back through the diode. This smooths the chopped pulses into clean, steady holding current.
-- **Switching Frequency**: We chose **$20.0\text{ kHz}$**. It's above human hearing so you don't hear a high-pitched whine inside the van, and it keeps current ripple under 3%.
+- **Switching Frequency**: We chose **20.0 kHz**. It's above human hearing so you don't hear a high-pitched whine inside the van, and it keeps current ripple under 3%.
 
 ### 2. The Math Behind the Numbers
-- **Pull-in**: Full $12.0\text{ V}$ for $100\text{ ms}$.
-- **Holding Duty Cycle**: $35\%$ ($D = 0.35$).
+- **Pull-in**: Full 12.0 V for 100 ms.
+- **Holding Duty Cycle**: 35% (D = 0.35).
 - **Effective Holding Voltage**:
-  $$V_{\text{hold}} = 0.35 \times 12.0\text{ V} = 4.20\text{ V}$$
+  V_hold = 0.35 × 12.0 V = 4.20 V
 - **Holding Power**:
-  $$P_{\text{hold}} = \frac{(4.20\text{ V})^2}{32.0\Omega} = \mathbf{0.55\text{ W}}$$
+  P_hold = (4.20 V)² / 32.0 Ω = 0.55 W
 
 ---
 
 ## 6. How It Worked on the Bench
 
-We updated the BMS driver code and ran another 30-minute test at the same room temperature ($22.0^\circ\text{C}$).
+We updated the BMS driver code and ran another 30-minute test at the same room temperature (22.0°C).
 
 ### Log with the PWM Circuit Active
 
@@ -170,10 +170,10 @@ We updated the BMS driver code and ran another 30-minute test at the same room t
 
 | Measurement | Before (Steady 12V) | After (PWM Hold) | Difference |
 | :--- | :--- | :--- | :--- |
-| **Holding Voltage** | $12.02\text{ V}$ | $4.21\text{ V}$ | **$-65\%$** |
-| **Holding Current** | $0.375\text{ A}$ | $0.131\text{ A}$ | **$-65\%$** |
-| **Heat Generated** | $4.51\text{ W}$ | $0.55\text{ W}$ | **$-87.8\%$ power cut** |
-| **30-Min Coil Temp** | $48.5^\circ\text{C}$ ($+25.9^\circ\text{C}$ rise) | $26.4^\circ\text{C}$ ($+4.4^\circ\text{C}$ rise) | **Dropped by $22.1^\circ\text{C}$** |
+| **Holding Voltage** | 12.02 V | 4.21 V | **-65%** |
+| **Holding Current** | 0.375 A | 0.131 A | **-65%** |
+| **Heat Generated** | 4.51 W | 0.55 W | **-87.8% power cut** |
+| **30-Min Coil Temp** | 48.5°C (+25.9°C rise) | 26.4°C (+4.4°C rise) | **Dropped by 22.1°C** |
 | **Contact Grip** | Risky as resistance crept up | Rock solid, zero vibration chatter | **Passed all tests** |
 
 This completely fixed the thermal issue. The coil barely got warm to the touch, and we cleared the yellow flag with the Argonne judges.

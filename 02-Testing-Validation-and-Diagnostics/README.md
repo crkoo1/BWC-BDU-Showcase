@@ -27,7 +27,7 @@ Here is how the testing went, what the numbers looked like, and what feedback we
 
 The toughest electrical trial was simulating a 150 kW DC fast-charging session. The test rig pumped **300 Amps DC** continuously through our busbars and contactors for **30 minutes straight**.
 
-The rule was simple: **no live metal or component could heat up by more than 30°C over the room temperature**. If anything went over that $+30^\circ\text{C}$ rise limit, you failed.
+The rule was simple: **no live metal or component could heat up by more than 30°C over the room temperature**. If anything went over that +30°C rise limit, you failed.
 
 ---
 
@@ -61,7 +61,7 @@ flowchart TD
     style LAPTOP fill:#0f172a,stroke:#10b981,stroke-width:2px,color:#e2e8f0
 ```
 
-We coated each sensor with a layer of Lord Thermoset epoxy. That gave us over $2,500\text{V}$ of electrical isolation so 400V couldn't accidentally jump onto our sensitive 5V reading wires.
+We coated each sensor with a layer of Lord Thermoset epoxy. That gave us over 2,500V of electrical isolation so 400V couldn't accidentally jump onto our sensitive 5V reading wires.
 
 ---
 
@@ -82,9 +82,9 @@ Time (min)   Current (A)   Main Busbar (°C)   Breaktor (°C)   DCFC Lug (°C)  
 ```
 
 ### The Takeaway
-- **The limit**: You could not go over $+30.0^\circ\text{C}$ rise.
-- **Our hottest point**: The fast-charging contactor lug hit **$+27.6^\circ\text{C}$ rise** (peaking at $50.2^\circ\text{C}$ in a $22.6^\circ\text{C}$ room).
-- **The main busbars**: Settled at **$46.1^\circ\text{C}$** ($+23.5^\circ\text{C}$ rise).
+- **The limit**: You could not go over +30.0°C rise.
+- **Our hottest point**: The fast-charging contactor lug hit **+27.6°C rise** (peaking at 50.2°C in a 22.6°C room).
+- **The main busbars**: Settled at **46.1°C** (+23.5°C rise).
 
 This proved our 1" × 1/4" aluminum busbar choice had plenty of metal to shed heat without needing expensive water cooling plates inside the box.
 
@@ -95,7 +95,7 @@ This proved our 1" × 1/4" aluminum busbar choice had plenty of metal to shed he
 We passed the main electrical check, but the technical inspection gave us two items to fix:
 
 ### 1. The Hot 12V Relay Coil (Yellow Flag)
-The high-voltage busbars stayed nice and cool. But the low-voltage 12V coil that held our main contactor shut reached **$48.5^\circ\text{C}$** inside the closed box.
+The high-voltage busbars stayed nice and cool. But the low-voltage 12V coil that held our main contactor shut reached **48.5°C** inside the closed box.
 
 David from Argonne National Lab pointed this out during inspection. He recommended that we look into using a PWM economizer circuit to cut down the holding current. This led directly to our flagship investigation below.
 
@@ -130,7 +130,7 @@ Quick Summary:
 | **12V Contactor Coils** | Relay coil reached ~48°C just holding the contacts closed. | David (Argonne National Lab) | Built a 20 kHz PWM circuit to cut holding current by 65%. |
 | **Breaktor Bolts** | Bolts must stay under 20 mm so they don't bottom out in the blind holes. | Electrical Safety Inspection | Swapped all bolts to M6 × 16 mm with spring washers. |
 | **Precharge Wire Path** | Don't bundle thin precharge wires right against heavy busbars. | AVL Safety Inspection | Clipped wires to the plastic walls away from hot metal. |
-| **Torque Marks** | Every high-voltage bolted joint needs visible paint inspection marks. | Competition Safety Marshalls | Torqued everything to $9.0\text{ N}\cdot\text{m}$ and added bright green torque seal. |
+| **Torque Marks** | Every high-voltage bolted joint needs visible paint inspection marks. | Competition Safety Marshalls | Torqued everything to 9.0 N·m and added bright green torque seal. |
 
 ---
 
